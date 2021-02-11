@@ -1,0 +1,29 @@
+version: '3.6'
+
+services:
+  joomla:
+    build:
+      context: ./
+    restart: always
+    links:
+      - joomladb:mysql
+    ports:
+      - 8888:80
+    environment:
+      JOOMLA_DB_HOST: joomladb
+      JOOMLA_DB_PASSWORD: joomla
+      XDEBUG_CONFIG: "discover_client_host=true client_port=9000 force_display_errors=1 idekey='phpstorm' start_with_request=yes"
+      PHP_IDE_CONFIG: "serverName=localhost"
+    volumes:
+      - type: bind
+        source: ./
+        target: /var/www/html/
+        consistency: cached
+  joomladb:
+    image: mysql:5.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: joomla
+    ports:
+      - 23306:3306
+
