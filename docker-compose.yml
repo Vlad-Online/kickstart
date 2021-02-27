@@ -12,6 +12,7 @@ services:
     environment:
       JOOMLA_DB_HOST: joomladb
       JOOMLA_DB_PASSWORD: joomla
+      XDEBUG_MODE: 'debug'
       XDEBUG_CONFIG: "discover_client_host=true client_port=9000 force_display_errors=1 idekey='phpstorm' start_with_request=yes"
       PHP_IDE_CONFIG: "serverName=localhost"
     volumes:
